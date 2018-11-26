@@ -1,5 +1,9 @@
-class Computer < Player
+class Players::Computer < Player
   def move(board)
+    return get_move(board).to_s
+  end
+
+  def get_move(board)
     turns_played = board.turn_count
     if turns_played == 0
       #if starting the game, choose the middle cell so as to maximize
@@ -17,6 +21,7 @@ class Computer < Player
     remaining_winning_moves = []
     loss_prevention_moves = []
     opposite_token = @token == "X" ? "O" : "X"
+
     WIN_COMBINATIONS.each do |combo|
       opp_indices, my_indices, unclaimed_indices = []
       #number of cells in this combo occupied by other player:

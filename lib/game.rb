@@ -26,16 +26,16 @@ class Game
     if self.draw?
       puts "Cat's Game!"
     elsif self.won?
-      puts "Congratulations #{self.winner.token}!"
+      puts "Congratulations #{self.winner}!"
     end
   end
 
   def turn
     #num = current_player == @player_1 ? "1" : "2"
     #puts "Player #{num}, choose a cell number:"
-    cell_number = current_player.move
+    cell_number = current_player.move(@board)
     if @board.valid_move?(cell_number)
-      @board.update(cell_number, current_player.token)
+      @board.update(cell_number, current_player)
     else
       turn
     end
