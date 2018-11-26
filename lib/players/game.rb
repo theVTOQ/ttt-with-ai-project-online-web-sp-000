@@ -12,7 +12,7 @@ class Game
 
   attr_accessor :board, :player_1, :player_2
 
-  def initialize(player_1 = Human.new("X"), player_2 = Human.new("O"), board = Board.new)
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -26,16 +26,16 @@ class Game
     if self.draw?
       puts "Cat's Game!"
     elsif self.won?
-      puts "Congratulations #{self.winner.token}!"
+      puts "Congratulations #{self.winner}!"
     end
   end
 
   def turn
     #num = current_player == @player_1 ? "1" : "2"
     #puts "Player #{num}, choose a cell number:"
-    cell_number = current_player.move
+    cell_number = current_player.move(@board)
     if @board.valid_move?(cell_number)
-      @board.update(cell_number, current_player.token)
+      @board.update(cell_number, current_player)
     else
       turn
     end
