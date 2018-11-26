@@ -1,6 +1,6 @@
 class Players::Computer < Player
   def move(board)
-    return get_move(board).to_s
+    return (get_move(board) + 1).to_s
   end
 
   def get_move(board)

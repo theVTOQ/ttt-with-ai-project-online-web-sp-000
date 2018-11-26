@@ -8,14 +8,14 @@ num_humans = gets.to_i
 game, player_1, player_2 = nil
 board = Board.new
 if num_humans == 0
-  player_1 = Players::Computer.new
-  player_2 = Players::Computer.new
+  player_1 = Players::Computer.new("X")
+  player_2 = Players::Computer.new("O")
 elsif num_humans == 1
-  player_1 = Players::Humans.new
-  player_2 = Players::Computer.new
+  player_1 = Players::Humans.new("X")
+  player_2 = Players::Computer.new("O")
 else
-  player_1 = Players::Humans.new
-  player_2 = Players::Humans.new
+  player_1 = Players::Humans.new("X")
+  player_2 = Players::Humans.new("O")
 end
 
 game = Game.new(player_1, player_2, board)
