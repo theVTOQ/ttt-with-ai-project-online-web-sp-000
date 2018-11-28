@@ -22,7 +22,7 @@ class Players::Computer < Player
       return final_cell
     end
 
-    #valid_moves = @board.select{|cell| cell == " "}
+    valid_moves = @board.cells.select{|cell| cell == " "}
     remaining_winning_indices = []
     loss_prevention_indices = []
     opposite_token = @token == "X" ? "O" : "X"
