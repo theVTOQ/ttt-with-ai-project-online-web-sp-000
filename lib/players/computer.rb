@@ -106,8 +106,7 @@ class Players::Computer < Player
     end
 
     #randomly choose an index from among those with the most occurences in
-    #the remaining possible winning combinations, if there are any
-
+    #the remaining possible winning combinations
     return indices_with_most_occurences[rand(indices_with_most_occurences.size)]
   end
 end
