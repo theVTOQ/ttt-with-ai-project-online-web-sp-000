@@ -22,7 +22,6 @@ class Players::Computer < Player
       return final_cell
     end
 
-    valid_moves = @board.cells.select{|cell| cell == " "}
     remaining_winning_indices = []
     loss_prevention_indices = []
     opposite_token = @token == "X" ? "O" : "X"
@@ -77,6 +76,7 @@ class Players::Computer < Player
     #at this point, neither of us are one move away from a win;
     #if there are no remaining winning moves, choose a valid move randomly
     if remaining_winning_indices.size == 0
+      valid_moves = @board.cells.select{|cell| cell == " "}
       return valid_moves[rand(valid_moves.size)]
     end
 
