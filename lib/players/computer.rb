@@ -80,6 +80,10 @@ class Players::Computer < Player
     indices_with_most_occurences = [] #array to contain indices that are tied for the most occurences
     most_occurences = 0 #the highest number of occurences so far
 
+
+    if remaining_winning_indices.size == 0
+
+    end
     #cycle through each remaining winning index, and keep track of how often each index occurs
     remaining_winning_indices.each do |index|
       existing_occurences = occurences[index]
@@ -100,7 +104,8 @@ class Players::Computer < Player
     end
 
     #randomly choose an index from among those with the most occurences in
-    #the remaining possible winning combinations
+    #the remaining possible winning combinations, if there are any
+
     return indices_with_most_occurences[rand(indices_with_most_occurences.size)]
   end
 end
