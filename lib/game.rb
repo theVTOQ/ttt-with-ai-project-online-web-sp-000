@@ -34,7 +34,7 @@ class Game
     #num = current_player == @player_1 ? "1" : "2"
     #puts "Player #{num}, choose a cell number:"
     cell_number = current_player.move(@board)
-    #binding.pry
+    binding.pry
     if @board.valid_move?(cell_number)
       @board.update(cell_number, current_player)
     elsif self.over?
