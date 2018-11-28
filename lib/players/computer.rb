@@ -1,7 +1,7 @@
 class Players::Computer < Player
   def move(board)
     move = get_move(board)
-    return (move == nil) ? nil : (move + 1).to_s
+    return (move == nil) ? nil : (move.to_i + 1).to_s
   end
 
   def get_move(board)
