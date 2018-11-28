@@ -9,7 +9,7 @@ class Players::Computer < Player
       #if starting the game, choose the middle cell so as to maximize
       #winning chances
       return 4
-    elsif turns_played == 1 && board.taken?(4)
+    elsif turns_played == 1 && board.taken?("5")
       #the first move has been played, and the middle cell was occupied;
       #now, must randomly choose a cell that is both on a diagonal
       #and the end of a row to mazimizez our winning chances
@@ -17,13 +17,15 @@ class Players::Computer < Player
       return diagonal_edges[rand(diagonal_edges.size)]
     end
 
-    valid_moves = @board.select{|cell| cell == " "}
-    remaining_winning_moves = []
-    loss_prevention_moves = []
+    #valid_moves = @board.select{|cell| cell == " "}
+    remaining_winning_indices = []
+    loss_prevention_indices = []
     opposite_token = @token == "X" ? "O" : "X"
 
-    WIN_COMBINATIONS.each do |combo|
-      opp_indices, my_indices, unclaimed_indices = []
+    Game::WIN_COMBINATIONS.each do |combo|
+      opp_indices = []
+      my_indices = []
+      unclaimed_indices = []
       #number of cells in this combo occupied by other player:
       opp_total = 0 #combo.select{|cell| cell == opposite_token}.count
       #number of cells in this combo I have occupied
@@ -32,7 +34,7 @@ class Players::Computer < Player
       total_unclaimed = 0 #3 - opp_total - my_total
 
       combo.each do |index|
-        case board[index]
+        case board.cells[index]
         when " "
           total_unclaimed += 1
           unclaimed_indices << index
@@ -53,7 +55,7 @@ class Players::Computer < Player
         #if opposite player has 2 of the three cells in this combo occupied,
         #and the remaining cell is empty, will have to fill that cell later
         #if exhaust potential winning moves
-        loss_prevention_moves << unclaimed_indices[0]  #combo.detect{|index| board[index] == " "}
+        loss_prevention_indices << unclaimed_indices[0]  #combo.detect{|index| board[index] == " "}
       elsif opp_total == 0
         #if opponent has not occupied any cells in this combo,
         #add all empty indices to remaining_winning_indices
@@ -63,8 +65,8 @@ class Players::Computer < Player
 
     #at this point, no winning move has been playable; next priority is to prevent
     #opponent from winning, if opponent is one move away from winning
-    if loss_prevention_moves.size > 0
-      return loss_prevention_moves[0]
+    if loss_prevention_indices.size > 0
+      return loss_prevention_indices[0]
     end
 
     #at this point, neither of us are one move away from a win; now we must
