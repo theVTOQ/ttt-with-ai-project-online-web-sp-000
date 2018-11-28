@@ -18,7 +18,7 @@ class Players::Computer < Player
     elsif turns_played == 8
       #there is only one playable cell, so play it and skip the
       #remaining logic in this method
-      final_cell = board.cells.select{|cell| cell == " "}
+      final_cell = board.cells.detect{|cell| cell == " "}
       return final_cell
     end
 
