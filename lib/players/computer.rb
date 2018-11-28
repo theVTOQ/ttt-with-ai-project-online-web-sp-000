@@ -6,7 +6,6 @@ class Players::Computer < Player
 
   def get_move(board)
     turns_played = board.turn_count
-    move = nil
     if turns_played == 0
       #if starting the game, choose the middle cell so as to maximize
       #winning chances
