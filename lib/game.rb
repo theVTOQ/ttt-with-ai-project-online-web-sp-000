@@ -38,7 +38,7 @@ class Game
     if @board.valid_move?(cell_number)
       @board.update(cell_number, current_player)
     elsif self.over?
-
+      return
     else
       turn
     end
