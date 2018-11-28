@@ -37,6 +37,8 @@ class Game
     binding.pry
     if @board.valid_move?(cell_number)
       @board.update(cell_number, current_player)
+    elsif self.over?
+
     else
       turn
     end
