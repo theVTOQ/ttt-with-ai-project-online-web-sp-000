@@ -10,18 +10,18 @@ class Players::Computer < Player
     if turns_played == 0
       #if starting the game, choose the middle cell so as to maximize
       #winning chances
-      move = 4
+      return 4
     elsif turns_played == 1 && board.taken?("5")
       #the first move has been played, and the middle cell was occupied;
       #now, must randomly choose a cell that is both on a diagonal
       #and the end of a row to mazimizez our winning chances
       diagonal_edges = [0,2,6,8]
-      move = diagonal_edges[rand(diagonal_edges.size)]
+      return diagonal_edges[rand(diagonal_edges.size)]
     elsif turns_played == 8
       #there is only one playable cell, so play it and skip the
       #remaining logic in this method
       final_cell = board.cells.detect{|cell| cell == " "}
-      move = final_cell
+      return final_cell
     end
 
     remaining_winning_indices = []
@@ -56,7 +56,7 @@ class Players::Computer < Player
       if my_total == 2 && total_unclaimed == 1
         #if I have 2 of the three cells in this combo occupied,
         #and the remaining cell is empty, must fill that cell
-        move = unclaimed_indices[0] #combo.detect{|index| board[index] == " "}
+        return unclaimed_indices[0] #combo.detect{|index| board[index] == " "}
       elsif opp_total == 2 && total_unclaimed == 1
         #if opposite player has 2 of the three cells in this combo occupied,
         #and the remaining cell is empty, will have to fill that cell later
@@ -72,14 +72,14 @@ class Players::Computer < Player
     #at this point, no winning move has been playable; next priority is to prevent
     #opponent from winning, if opponent is one move away from winning
     if loss_prevention_indices.size > 0
-      move = loss_prevention_indices[0]
+      return loss_prevention_indices[0]
     end
 
     #at this point, neither of us are one move away from a win;
     #if there are no remaining winning moves, choose a valid move randomly
     if remaining_winning_indices.size == 0
       valid_moves = board.cells.select{|cell| cell == " "}
-      move = valid_moves[rand(valid_moves.size)]
+      return valid_moves[rand(valid_moves.size)]
     end
 
     ##if there are remaining winning moves,
@@ -109,6 +109,6 @@ class Players::Computer < Player
 
     #randomly choose an index from among those with the most occurences in
     #the remaining possible winning combinations
-    move = indices_with_most_occurences[rand(indices_with_most_occurences.size)]
+    return indices_with_most_occurences[rand(indices_with_most_occurences.size)]
   end
 end
