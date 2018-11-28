@@ -35,10 +35,10 @@ class Game
     #puts "Player #{num}, choose a cell number:"
     cell_number = current_player.move(@board)
     #binding.pry
-    if @board.valid_move?(cell_number)
-      @board.update(cell_number, current_player)
-    elsif self.over?
+    if cell_number == nil || self.over?
       return
+    elsif  @board.valid_move?(cell_number)
+      @board.update(cell_number, current_player)
     else
       turn
     end
