@@ -74,16 +74,18 @@ class Players::Computer < Player
       return loss_prevention_indices[0]
     end
 
-    #at this point, neither of us are one move away from a win; now we must
-    #choose the empty index that occurs in the most winning combinations
+    #at this point, neither of us are one move away from a win;
+    #if there are no remaining winning moves, choose a valid move randomly
+    if remaining_winning_indices.size == 0
+      return valid_moves[rand(valid_moves.size)]
+    end
+
+    ##if there are remaining winning moves,
+    #choose the empty index that occurs in the most winning combinations,
     occurences = {} #hash to keep track of occurences of indices in winning combos
     indices_with_most_occurences = [] #array to contain indices that are tied for the most occurences
     most_occurences = 0 #the highest number of occurences so far
 
-
-    if remaining_winning_indices.size == 0
-
-    end
     #cycle through each remaining winning index, and keep track of how often each index occurs
     remaining_winning_indices.each do |index|
       existing_occurences = occurences[index]
