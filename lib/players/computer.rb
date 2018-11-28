@@ -15,6 +15,11 @@ class Players::Computer < Player
       #and the end of a row to mazimizez our winning chances
       diagonal_edges = [0,2,6,8]
       return diagonal_edges[rand(diagonal_edges.size)]
+    elsif turns_played == 8
+      #there is only one playable cell, so play it and skip the
+      #remaining logic in this method
+      final_cell = board.cells.select{|cell| cell == " "}
+      return final_cell
     end
 
     #valid_moves = @board.select{|cell| cell == " "}
