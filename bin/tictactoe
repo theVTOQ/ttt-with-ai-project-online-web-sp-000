@@ -11,11 +11,11 @@ if num_humans == 0
   player_1 = Players::Computer.new("X")
   player_2 = Players::Computer.new("O")
 elsif num_humans == 1
-  player_1 = Players::Humans.new("X")
+  player_1 = Players::Human.new("X")
   player_2 = Players::Computer.new("O")
 else
-  player_1 = Players::Humans.new("X")
-  player_2 = Players::Humans.new("O")
+  player_1 = Players::Human.new("X")
+  player_2 = Players::Human.new("O")
 end
 
 game = Game.new(player_1, player_2, board)

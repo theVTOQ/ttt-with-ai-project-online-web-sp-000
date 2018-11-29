@@ -23,6 +23,7 @@ class Game
       self.turn
     end
 
+    @board.display
     if self.draw?
       puts "Cat's Game!"
     elsif self.won?
@@ -33,6 +34,7 @@ class Game
   def turn
     #num = current_player == @player_1 ? "1" : "2"
     #puts "Player #{num}, choose a cell number:"
+    @board.display
     cell_number = current_player.move(@board)
     if @board.valid_move?(cell_number.to_s)
       @board.update(cell_number, current_player)
